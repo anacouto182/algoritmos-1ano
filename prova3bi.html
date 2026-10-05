@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="button" value="Listar Pelúcias" onclick="mostrarTodosOsProdutos()"><br>
+    <input type="button" value="Caro, barato e diferença" onclick="mostrarCaroBaratoEDiferenca()">
+    <label for="inputCor">Qual cor?</label>
+    <input type="text" id="inputCor">
+    <label for="inputPorcentagemAcrescimo">Qual o valor do acréscimo?</label>
+    <input type="number" id="inputPorcentagemAcrescimo">
+    <input type="button" value="Aplicar acréscimo" onclick="mostrarComAcrescimo()"><br>
+    <input type="button" value="Contar por Categoria" onclick="mostrarContagemPorCategoria()"><br>
+    <br>
+    <span id="resposta"></span>
+    <script>
+        class Produto {
+            constructor(id, nome, peso, cor, categoria, datalancamento, preco) {
+                this.id = id;
+                this.nome = nome;
+                this.peso = peso;
+                this.cor = cor;
+                this.categoria = categoria;
+                this.datalancamento = datalancamento;
+                this.preco = preco
+            }
+        }
+        let listaProdutos = [];
+        let p = new Produto(1, "Teddy", 1.50, "Marrom", "Ursos", "2023-05-12", 105.90);
+        listaProdutos.push(p);
+        p = new Produto(2, "Uni", 0.40, "Rosa", "Mágicos", "2022-11-01", 79.90);
+        listaProdutos.push(p);
+        p = new Produto(3, "Arlo", 0.60, "Verde", "Dinossauros", "2023-08-29", 89.90);
+        listaProdutos.push(p);
+        p = new Produto(4, "Buck", 0.30, "Verde", "Dinossauros", "2024-02-10", 59.90);
+        listaProdutos.push(p);
+        p = new Produto(5, "Mila", 1.2, "Marrom", "Ursos", "2021-09-15", 135.00);
+        listaProdutos.push(p);
+        // Listar todos os atributos de todas as pelúcias
+        function listarProdutos(lista) {
+            let listagem = "";
+            for (let i = 0; i < lista.length; i++) {
+                listagem += "ID: " + lista[i].id + " - ";
+                listagem += "Nome: " + lista[i].nome + " - ";
+                listagem += "Peso: " + lista[i].peso + "kg - ";
+                listagem += "Cor: " + lista[i].cor + " - ";
+                listagem += "Categoria: " + lista[i].categoria + " - ";
+                listagem += "Data de Lançamento: " + lista[i].datalancamento + " - ";
+                listagem += "Preço: R$ " + lista[i].preco.toFixed(2);
+                listagem += "<br>";
+            }
+            return listagem;
+        }
+        function mostrarTodosOsProdutos() {
+            document.getElementById("resposta").innerHTML = listarProdutos(listaProdutos);
+    }
+    //faça as funções que estão faltando
+    function maisCaro(listaProdutos){
+        let maisC = listaProdutos[0].preco; let pos = 0;
+        for (let i = 0; i<listaProdutos.length; i++){
+            if (maisC < listaProdutos[i].preco){
+                maisC = listaProdutos[i].preco; pos = i;
+            }
+        }
+        return listaProdutos[pos].nome +" - R$ " +maisC;
+    }
+
+
+     function maisBarato(listaProdutos){
+        let maisB = listaProdutos[0].preco; let pos = 0;
+        for (let i = 0; i<listaProdutos.length; i++){
+            if (maisB > listaProdutos[i].preco){
+                maisB = listaProdutos[i].preco; pos = i;
+            }
+        }
+        return listaProdutos[pos].nome +" - R$ " +maisB;
+    }
+     function mostrarCaroBaratoEDiferenca(){
+        let a = "mais caro: "+maisCaro(listaProdutos)+"<br>"+"mais barato: "+maisBarato(listaProdutos)+"<br>"+diferenca(maisC,maisB);
+        document.getElementById("resposta").innerHTML=a;
+     }
+    </script>
+</body>
